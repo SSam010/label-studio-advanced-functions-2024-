@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  label_studio_extended_function:
+    container_name: label_studio_extended_function
+    build:
+      context: .
+    working_dir: /usr/src/label_extended_function/server
+    restart: always
+    env_file:
+      - .env.server
+    ports:
+      - "${LBS_EXT_FA_PORT}:${LBS_EXT_LOCAL_FA_PORT}"
+    command: uvicorn app:app --port ${LBS_EXT_LOCAL_FA_PORT} --host ${LBS_EXT_FA_HOST} --reload
+    volumes:
+      - ./label_studio_ext_func:/usr/src/label_extended_function/server

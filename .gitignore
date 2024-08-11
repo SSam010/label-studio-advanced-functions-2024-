@@ -1,0 +1,5 @@
+.idea/
+/.env*
+**/__pycache__
+**/__MACOSX
+/without_sink/
