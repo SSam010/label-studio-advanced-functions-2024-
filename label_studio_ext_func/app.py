@@ -27,7 +27,8 @@ app = FastAPI(
 
 @app.on_event("startup")
 async def startup_event():
-    nltk.download('punkt', quiet=True)
+    nltk.download("punkt", quiet=True)
+
 
 app.include_router(router)
 

@@ -12,7 +12,7 @@ class Projects(BaseModel):
     projects: list[int]
     drop_space: bool = True
 
-    @validator('projects')
+    @validator("projects")
     def check_projects(self, projects):
         if len(projects) > 2:
             return projects[:2]
@@ -25,7 +25,7 @@ class ProjectsMerge(BaseModel):
     drop_space: bool = True
     only_diff: bool = False
 
-    @validator('projects')
+    @validator("projects")
     def check_projects(self, projects):
         if len(projects) > 2:
             return projects[:2]
@@ -36,7 +36,7 @@ class ProjectsMergeRelations(BaseModel):
     projects: list[int]
     title: Optional[str] = None
 
-    @validator('projects')
+    @validator("projects")
     def check_projects(self, projects):
         if len(projects) > 2:
             return projects[:2]
@@ -46,4 +46,4 @@ class ProjectsMergeRelations(BaseModel):
 class DataForNewProject(BaseModel):
     data: list
     relation_labels: list
-    title: Optional[str] = 'title'
+    title: Optional[str] = "title"

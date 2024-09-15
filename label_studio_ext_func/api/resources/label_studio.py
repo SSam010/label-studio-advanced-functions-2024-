@@ -13,11 +13,10 @@ from api.schemas.label_studio import (
     ProjectsMergeRelations,
 )
 from config import labels
-from logger import config as logger_conf
 
-logger_conf.setup_logger(__name__)
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
+
 router = APIRouter(prefix="", tags=["label_studio_ext_func"])
 templates = Jinja2Templates(directory="front/templates")
 

@@ -10,7 +10,7 @@ from nltk import sent_tokenize
 from config import LB
 from utils.utils import find_first
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 
 class LabelWork:
@@ -135,11 +135,9 @@ class LabelWork:
             projects_data = self.drop_simular_annotations(projects_data)
         result = self._merging_projects(projects_data)
 
-        if title is None:
-            title = f"Union_project " + ", ".join(map(str, projects))
+        title = title or f"Union_project " + ", ".join(map(str, projects))
 
-        if label_config is None:
-            label_config = self.make_default_views_layout(projects)
+        label_config = label_config or self.make_default_views_layout(projects)
 
         new_project_id = await self._create_new_project(
             label_config=label_config, title=title
@@ -151,7 +149,7 @@ class LabelWork:
 
     async def get_current_relations_from_projects(
         self, projects: list[int]
-    ) -> set[str]:
+    ) -> set[set]:
         relations = set()
         for project_id in projects:
             project_meta_info = await self.get_meta_project_info(project_id)
@@ -187,8 +185,7 @@ class LabelWork:
             self._update_relation_information(project)
         result = self._merge_relations_process(projects_data)
 
-        if title is None:
-            title = f"Union_project " + ", ".join(map(str, projects))
+        title = title or f"Union_project " + ", ".join(map(str, projects))
 
         return await self.create_project_with_data(
             data=result, title=title, relation_labels=relations
@@ -1090,9 +1087,9 @@ class LabelWork:
 
         if len(filtered_annotations) < entity_count_per_sentence:
             return None
-        else:
-            sentence_data["annotations"] = filtered_annotations
-            return sentence_data
+
+        sentence_data["annotations"] = filtered_annotations
+        return sentence_data
 
     @staticmethod
     def _make_upload_data_after_split_annotations_per_sentence(

@@ -19,5 +19,5 @@ labels = (
 
 class LB:
     LABEL_STUDIO_API = os.environ.get("LABEL_STUDIO_API")
-    LB_SERVICE_NAME = os.environ.get("LABEL_STUDIO_SERVICE_NAME")
+    LB_SERVICE_NAME = os.environ.get("LABEL_STUDIO_HOST")
     LABEL_STUDIO_PORT = os.environ.get("LABEL_STUDIO_PORT")

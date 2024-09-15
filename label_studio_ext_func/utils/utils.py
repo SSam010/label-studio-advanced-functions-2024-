@@ -24,12 +24,15 @@ def timer(func):
     A decorator that prints the time a function or coroutine takes to execute.
     """
     if inspect.iscoroutinefunction(func):
+
         async def wraps(*args, **kwargs):
             start = datetime.now()
             result = await func(*args, **kwargs)
             print(datetime.now() - start)
             return result
+
     else:
+
         def wraps(*args, **kwargs):
             start = datetime.now()
             result = func(*args, **kwargs)
