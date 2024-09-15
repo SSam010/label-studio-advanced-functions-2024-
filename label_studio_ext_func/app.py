@@ -16,7 +16,7 @@ from logger import config as logger
 from api.router import router
 from config import SWAGGER, TITLE
 
-logger.setup_logger(__name__)
+logger.setup_logger()
 
 app = FastAPI(
     title=TITLE,

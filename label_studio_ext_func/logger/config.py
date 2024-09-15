@@ -1,15 +1,16 @@
 import logging
 import logging.handlers
-import os
 
 
-def setup_logger(script_name):
+def setup_logger():
+    """
+    Sets up a logger for the provided script. The logger writes logs to a rotating file handler and the console.
+    """
     logger = logging.getLogger()
 
     if not logger.handlers:
-        log_filename = f"{os.path.splitext(script_name)[0]}.log"
         handler = logging.handlers.RotatingFileHandler(
-            filename=f"logger/log_files/{log_filename}",
+            filename=f"logger/log_files/app_log.log",
             maxBytes=1024 * 1024 * 10,
             backupCount=5,
         )
@@ -22,5 +23,4 @@ def setup_logger(script_name):
         logger.setLevel(logging.INFO)
         logger.addHandler(handler)
         logger.addHandler(logging.StreamHandler())
-
     return logger
